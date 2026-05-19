@@ -60,10 +60,10 @@ foreach ($sessions as $sessionKey) {
             $driverDTO = DriverTransformer::fromArray($rawDriver);
 
             // Create/update constructor
-            if ($driverDTO->teamName && $driverDTO->teamColor) {
+            if ($driverDTO->teamName && $driverDTO->teamColour) {
                 Constructor::updateOrCreate(
                     ['name' => $driverDTO->teamName],
-                    ['color_hex' => $driverDTO->teamColor]
+                    ['color_hex' => $driverDTO->teamColour]
                 );
             }
 
