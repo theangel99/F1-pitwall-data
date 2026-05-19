@@ -20,20 +20,17 @@ class SessionController extends Controller
      */
     public function laps(Session $session): View
     {
-        $session->load([
-            'race.season',
-            'laps' => fn ($query) => $query
-                ->with('driver.constructor')
-                ->where('is_pit_out_lap', false)
-                ->whereNotNull('lap_duration')
-                ->orderBy('lap_duration')
-                ->limit(100),
-        ]);
+        $session->load('race.season');
 
-        // Get fastest lap per driver
-        $fastestLaps = $session->laps
-            ->groupBy('driver_id')
-            ->map(fn ($laps) => $laps->sortBy('lap_duration')->first())
+        // Get fastest lap per driver using SQL
+        $fastestLaps = $session->laps()
+            ->select('laps.*')
+            ->selectRaw('ROW_NUMBER() OVER (PARTITION BY driver_id ORDER BY lap_duration ASC) as rn')
+            ->with('driver.constructor')
+            ->where('is_pit_out_lap', false)
+            ->whereNotNull('lap_duration')
+            ->get()
+            ->where('rn', 1)
             ->sortBy('lap_duration')
             ->values();
 
