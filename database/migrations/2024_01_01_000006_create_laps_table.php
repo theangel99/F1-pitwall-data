@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('laps', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('session_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('session_id')->constrained('f1_sessions')->cascadeOnDelete();
             $table->foreignUuid('driver_id')->constrained()->cascadeOnDelete();
             $table->integer('lap_number');
             $table->float('lap_duration', 10, 3)->nullable();

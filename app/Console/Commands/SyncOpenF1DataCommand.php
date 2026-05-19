@@ -18,7 +18,7 @@ class SyncOpenF1DataCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'openf1:sync {type? : The type of data to sync (meetings, sessions, laps, etc.)}';
+    protected $signature = 'openf1:sync {type? : The type of data to sync (meetings, sessions, laps, etc.)} {--session= : Session key for drivers/laps/positions sync}';
 
     /**
      * The console command description.
@@ -46,7 +46,14 @@ class SyncOpenF1DataCommand extends Command
         try {
             $syncType = SyncType::from($type);
             $this->info("Syncing {$syncType->label()}...");
-            $syncService->sync($syncType);
+
+            $params = [];
+            if ($sessionKey = $this->option('session')) {
+                $params['session_key'] = (int) $sessionKey;
+                $this->info("Using session key: {$sessionKey}");
+            }
+
+            $syncService->sync($syncType, $params);
             $this->info("Sync completed successfully!");
             return self::SUCCESS;
         } catch (\ValueError $e) {

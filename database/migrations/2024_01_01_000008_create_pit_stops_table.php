@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('pit_stops', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('session_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('session_id')->constrained('f1_sessions')->cascadeOnDelete();
             $table->foreignUuid('driver_id')->constrained()->cascadeOnDelete();
             $table->integer('lap_number');
             $table->float('duration', 10, 3)->nullable();
