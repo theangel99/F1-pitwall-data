@@ -1,0 +1,37 @@
+# Railway Environment Variables
+# Copy these to Railway → Variables tab
+
+APP_NAME=PitWall
+APP_ENV=production
+APP_KEY=base64:Vk85sDX/WSp6Gg57PDkb6WxfG7qF2xmo3jxl3H2S6m0=
+APP_DEBUG=false
+APP_TIMEZONE=UTC
+APP_URL=${{RAILWAY_PUBLIC_DOMAIN}}
+
+# Supabase PostgreSQL Database (using IPv4 Session Pooler)
+DB_CONNECTION=pgsql
+DB_HOST=aws-0-eu-central-1.pooler.supabase.com
+DB_PORT=6543
+DB_DATABASE=postgres
+DB_USERNAME=postgres.clsipeomzejeskqqxbex
+DB_PASSWORD=The.Angel99!
+DB_SSLMODE=require
+
+# Session, Cache & Queue (database-backed for free tier)
+SESSION_DRIVER=database
+SESSION_LIFETIME=120
+CACHE_STORE=database
+QUEUE_CONNECTION=database
+
+# Logging
+LOG_CHANNEL=stack
+LOG_LEVEL=info
+
+# OpenF1 API Configuration
+OPENF1_BASE_URL=https://api.openf1.org/v1
+OPENF1_CACHE_TTL=300
+OPENF1_RATE_LIMIT_SLEEP_US=350000
+
+# Railway will auto-set these:
+# - PORT (Railway assigns automatically)
+# - RAILWAY_PUBLIC_DOMAIN (your app URL)

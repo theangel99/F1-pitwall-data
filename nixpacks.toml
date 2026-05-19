@@ -7,7 +7,6 @@ cmds = ["composer install --no-dev --optimize-autoloader"]
 [phases.build]
 cmds = [
   "php artisan config:clear",
-  "php artisan cache:clear",
   "php artisan view:clear"
 ]
 
