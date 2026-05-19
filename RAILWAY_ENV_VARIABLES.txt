@@ -8,9 +8,9 @@ APP_DEBUG=false
 APP_TIMEZONE=UTC
 APP_URL=${{RAILWAY_PUBLIC_DOMAIN}}
 
-# Supabase PostgreSQL Database (using IPv4 Session Pooler)
+# Supabase PostgreSQL Database (using IPv4 Transaction Pooler)
 DB_CONNECTION=pgsql
-DB_HOST=aws-0-eu-central-1.pooler.supabase.com
+DB_HOST=aws-0-eu-west-1.pooler.supabase.com
 DB_PORT=6543
 DB_DATABASE=postgres
 DB_USERNAME=postgres.clsipeomzejeskqqxbex
